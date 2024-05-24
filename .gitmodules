@@ -1,0 +1,3 @@
+[submodule "YourPet"]
+	path = YourPet
+	url = https://github.com/CallumC1/YourPet.git
