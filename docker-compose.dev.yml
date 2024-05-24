@@ -9,6 +9,8 @@ services:
       - web
     networks:
       - webnet
+    environment:
+      - NGINX_SERVER_NAME=yourpet.callumc.local
 
 
   web:
@@ -41,7 +43,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
-      - ./db/setup/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./YourPet/setup/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - webnet
 

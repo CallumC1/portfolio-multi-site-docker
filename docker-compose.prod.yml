@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - webnet
+    environment:
+      - NGINX_SERVER_NAME=yourpet.callumc.net
+
+
+  web:
+    build:
+      context: ./YourPet
+      dockerfile: Dockerfile
+    ports:
+      - "8082:80"
+    volumes:
+      #- ./public:/var/www/html/public
+      - ./YourPet/router.php:/var/www/html/router.php
+      - ./YourPet/app:/var/www/html/app
+      - ./YourPet/apache/vhost.conf:/etc/apache2/sites-available/000-default.conf
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    networks:
+      - webnet
+
+  db:
+    image: mysql:8.4  # use a specific version of MySQL, adjust as necessary
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./YourPet/setup/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - webnet
+
+volumes:
+  db_data:
+
+networks:
+  webnet:
