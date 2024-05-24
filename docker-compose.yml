@@ -19,9 +19,9 @@ services:
       - "8082:80"
     volumes:
       #- ./public:/var/www/html/public
-      - ./router.php:/var/www/html/router.php
-      - ./app:/var/www/html/app
-      - ./apache/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      - ./YourPet/router.php:/var/www/html/router.php
+      - ./YourPet/app:/var/www/html/app
+      - ./YourPet/apache/vhost.conf:/etc/apache2/sites-available/000-default.conf
     depends_on:
       - db
     environment:
@@ -42,7 +42,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
-      - ./setup/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/setup/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - webnet
 
