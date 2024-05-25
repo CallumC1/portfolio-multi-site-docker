@@ -22,6 +22,7 @@ services:
     volumes:
       - ./certs:/etc/letsencrypt
       - ./certs-data:/data/letsencrypt
+      - ./webroot:/var/www/certbot
 
 
   web:
