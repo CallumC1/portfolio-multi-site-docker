@@ -12,6 +12,12 @@ services:
     environment:
       - NGINX_SERVER_NAME=yourpet.callumc.net
 
+    certbot:
+      image: certbot/certbot
+      volumes:
+        - ./certs:/ect/letsencrypt
+        - ./certs-data:/data/letsencrypt
+
 
   web:
     build:
