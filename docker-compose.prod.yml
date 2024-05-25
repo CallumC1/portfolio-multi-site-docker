@@ -12,8 +12,6 @@ services:
     networks:
       - webnet
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./sites-enabled:/etc/nginx/conf.d
       - ./certs:/etc/letsencrypt
       - ./certs-data:/data/letsencrypt
       - ./webroot:/var/www/certbot
