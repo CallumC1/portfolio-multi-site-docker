@@ -7,13 +7,12 @@ services:
       - "80:80"
     depends_on:
       - web
+      - certbot
     networks:
       - webnet
     volumes:
       - ./certs:/etc/letsencrypt
       - ./certs-data:/data/letsencrypt
-    depends_on:
-      - certbot
     environment:
       - NGINX_SERVER_NAME=yourpet.callumc.net
 
@@ -21,7 +20,7 @@ services:
   certbot:
     image: certbot/certbot
     volumes:
-      - ./certs:/ect/letsencrypt
+      - ./certs:/etc/letsencrypt
       - ./certs-data:/data/letsencrypt
 
 
