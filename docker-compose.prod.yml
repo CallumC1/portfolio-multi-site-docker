@@ -9,8 +9,14 @@ services:
       - web
     networks:
       - webnet
+    volumes:
+      - ./certs:/etc/letsencrypt
+      - ./certs-data:/data/letsencrypt
+    depends_on:
+      - certbot
     environment:
       - NGINX_SERVER_NAME=yourpet.callumc.net
+
 
   certbot:
     image: certbot/certbot
