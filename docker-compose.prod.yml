@@ -11,20 +11,9 @@ services:
       - certbot
     networks:
       - webnet
-    volumes:
-      - ./certs:/etc/letsencrypt
-      - ./certs-data:/data/letsencrypt
-      - ./webroot:/var/www/certbot
     environment:
       - NGINX_SERVER_NAME=yourpet.callumc.net
 
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certs:/etc/letsencrypt
-      - ./certs-data:/data/letsencrypt
-      - ./webroot:/var/www/certbot
 
 
   web:
